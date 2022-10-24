@@ -231,6 +231,7 @@ public class Hm2ObjectsPractice {
         firstTv.setDiagonal(32);
         firstTv.setTotalPrice(605);
         firstTv.setCurrencyPrice('€');
+        firstTv.setScreenType("Oled");
 
         Tv secondTv = new Tv();
         secondTv.setBrand("Samsung");
