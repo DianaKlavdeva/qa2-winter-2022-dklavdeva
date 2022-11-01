@@ -19,10 +19,14 @@ public class LocatorsSeleniumTest {
         .//div[@class = 'car-top-filter-control next'];
         .//span[@class = 'showing-cars'];
         .//div[@class = 'dc-ui dropdown inline-block'];
-        .//span[@ = '1 bag'];
+        .//ul[@class = 'dc-list dc-list-icon dc-list-md text-14 dc-list-horizontal dc-list-mt-8 car-params mt-8 text-gray-500'];
         .//a[@class = 'open-modal search-index trigger-gtm-rc rental-conditions with-logo'];
         .//a[@class = 'btn btn-book submit click-on-car selected-car prevent-loading instant'];
         .//div[@class = 'dc-ui badges mt-12'];
         .//div[@class = 'supplier-rating'];
-        .//div[@class= 'price-item-price-main'];
+        .//div[@class= 'price-item-price-main']
+
+                .//div[@class = 'spinner-container'];
+                .//div[@class = 'mb-8 text-24 text-bold text-center'];
+                .//div[@class = 'mb-24 text-center'];
 }
