@@ -1,15 +1,15 @@
 public class Student {
-    //----------------ATTRIBUTES-----------
+    //---------------ATTRIBUTES-----------
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
 
-    //--------CONSTRUCTOR---------
+    //--------------CONSTRUCTOR------------------
     public Student() {
 
     }
-    //-------------------GETTERS / SETTERS------------------
+    //--------------GETTERS / SETTERS-------------
 
     public Student(String firstName, String lastName, String email, String phone) {
         this.firstName = firstName;
