@@ -19,6 +19,7 @@ public class AmazonSeleniumTest {
     private final By CONTINUE_BTN = By.xpath(".//span[@class = 'a-button-inner']");
     private final By SHOP_CONTAINER = By.xpath(".//a [@class = 'nav-a  ']");
     private final By TREE_ITEM = By.xpath(".//div [@role = 'treeitem']/a");
+    private final By RIGHT_COLUMN = By.id("gridItemRoot");
 
     private final String CONTAINER = "Best Sellers";
     private final String ANY_DEPARTMENT = "Books";
@@ -44,17 +45,23 @@ public class AmazonSeleniumTest {
             }
         }
 
-        List<WebElement> items = browser.findElements(TREE_ITEM);
-
+        List<WebElement> departments = browser.findElements(TREE_ITEM);
         boolean flag = false;
-        for (WebElement item : items) {
-            if (item.getText().equals(ANY_DEPARTMENT)); {
+        for (WebElement department : departments) {
+            if (department.getText().equals(ANY_DEPARTMENT)) {
                 flag = true;
-                wait.until(ExpectedConditions.elementToBeClickable(item));
-                item.click();
+                wait.until(ExpectedConditions.elementToBeClickable(department));
+                department.click();
                 break;
             }
         }
+
+        List<WebElement> items = browser.findElements(RIGHT_COLUMN);
+        for (int i = 0; i < 3; i++) {
+            items.get(3).click();
+            break;
+        }
+
         Assertions.assertTrue(flag, "Item not found");
     }
 }
