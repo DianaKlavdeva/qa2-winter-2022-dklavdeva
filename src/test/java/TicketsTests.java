@@ -1,3 +1,4 @@
+import com.beust.ah.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class TicketsTests {
     private final By FROM = By.id("afrom");
@@ -24,11 +26,29 @@ public class TicketsTests {
     private final By BAG = By.id("bugs");
     private final By FLIGHT = By.id("flight");
 
+    private final By GET_PRICE_BTN = By.xpath(".//span[@onclick ='setLang();']");
+    private final By BOOK_BTN = By.id("book2");
+    private final By SEATS = By.xpath(".//div[@class = 'seat']");
+    private final By BOOK_FLIGHT_END = By.id("book3");
+
     private WebDriver browser;
     private WebDriverWait wait;
 
+
     @Test
     public void reservationCheck() {
+
+        String airportFrom = "RIX";
+        String airportTo = "SFO";
+        String firstName = "Diana";
+        String lastName = "Klavdeva";
+        String discountCode = "12345";
+        String adults = "3";
+        String children = "2";
+        String bag = "1";
+        String valueDate = "15";
+        String seat = "21";
+
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         browser = new ChromeDriver();
         browser.manage().window().maximize();
@@ -36,8 +56,8 @@ public class TicketsTests {
 
         wait = new WebDriverWait(browser, Duration.ofSeconds(10));
 
-        select(FROM, "RIX");
-        select(TO, "SFO");
+        select(FROM, airportFrom);
+        select(TO, airportTo);
 
 //          Select airportFrom = new Select(browser.findElement(FROM));
 //          airportFrom.selectByValue("RIX");
@@ -47,21 +67,34 @@ public class TicketsTests {
 
         browser.findElement(GO_BTN).click();
 
-        type(FIRST_NAME, "First Name");
+        type(FIRST_NAME, firstName);
 //          browser.findElement(FIRST_NAME).clear();
 //          browser.findElement(FIRST_NAME).sendKeys("First Name");
 
-        type(LAST_NAME, "Last Name");
+        type(LAST_NAME, lastName);
 //          browser.findElement(LAST_NAME).clear();
 //          browser.findElement(LAST_NAME).sendKeys("Last name");
-        type(DISCOUNT, "Discount code");
-        type(ADULTS, "3");
-        type(CHILDREN, "2");
-        type(BAG, "1");
-        select(FLIGHT, "13");
+        type(DISCOUNT, discountCode);
+        type(ADULTS, adults);
+        type(CHILDREN, children);
+        type(BAG, bag);
+        select(FLIGHT, valueDate);
+
+        browser.findElement(GET_PRICE_BTN).click();
 
         Assertions.assertEquals("RIX", "RIX", "Wrong airport!");
         Assertions.assertEquals("SFO", "SFO", "Wrong airport!");
+
+        browser.findElement(BOOK_BTN).click();
+
+       List<WebElement> seats = browser.findElements(SEATS);
+     for (int i = 0; i < 5; i++) {
+           wait.until(ExpectedConditions.elementToBeClickable(SEATS));
+           seats.get(5).click();
+          break;
+      }
+
+        browser.findElement(BOOK_FLIGHT_END).click();
     }
 
     private void select(By locator, String value) {
@@ -75,4 +108,6 @@ public class TicketsTests {
         input.clear();
         input.sendKeys(text);
     }
+
+
 }
