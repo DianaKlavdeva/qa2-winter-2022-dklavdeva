@@ -47,7 +47,7 @@ public class TicketsTests {
         String children = "2";
         String bag = "1";
         String valueDate = "15";
-        String seat = "21";
+        String seat = "7";
 
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         browser = new ChromeDriver();
@@ -82,19 +82,36 @@ public class TicketsTests {
 
         browser.findElement(GET_PRICE_BTN).click();
 
-        Assertions.assertEquals("RIX", "RIX", "Wrong airport!");
-        Assertions.assertEquals("SFO", "SFO", "Wrong airport!");
+        Assertions.assertEquals(airportFrom,airportFrom, "Wrong airport!");
+        Assertions.assertEquals(airportTo, airportTo, "Wrong airport!");
 
         browser.findElement(BOOK_BTN).click();
 
        List<WebElement> seats = browser.findElements(SEATS);
-     for (int i = 0; i < 5; i++) {
-           wait.until(ExpectedConditions.elementToBeClickable(SEATS));
-           seats.get(5).click();
-          break;
-      }
+   //  for (int i = 0; i < 5; i++) {
+   //        wait.until(ExpectedConditions.elementToBeClickable(SEATS));
+     //      seats.get(5).click();
+   //   }
+
+  //      for (WebElement s : seats){
+   //         s.
+    //    }
+
+        boolean isSeatSelect = false;
+        for (WebElement s : seats){
+            if (s.getText().equals(seat)) {
+                isSeatSelect = true;
+                s.click();
+                break;
+            }
+        }
+        Assertions.assertTrue(isSeatSelect, "Seat not select");
+        Assertions.assertEquals(seat, seat, "Seat not select");
 
         browser.findElement(BOOK_FLIGHT_END).click();
+
+        String finalText = "Thank You for flying with us!";
+        Assertions.assertTrue(finalText.equals(finalText), "Not final text");
     }
 
     private void select(By locator, String value) {
