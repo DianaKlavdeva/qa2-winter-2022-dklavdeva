@@ -47,7 +47,13 @@ public class TicketsTests {
         String children = "2";
         String bag = "1";
         String valueDate = "15";
-        String seat = "7";
+        String seat = "5";
+     //   String destinationIs = "Your destination is RIX to SFO";
+        String responseWithName = firstName;
+      //  String responseHasPrice = "You are flying from RIX to SFO for 4230 EUR";
+        String price = "3030";
+        String seatIs = seat;
+        String finalText = "Thank You for flying with us!";
 
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         browser = new ChromeDriver();
@@ -67,6 +73,9 @@ public class TicketsTests {
 
         browser.findElement(GO_BTN).click();
 
+        Assertions.assertEquals(airportFrom, airportFrom, "Airports not appear");
+        Assertions.assertEquals(airportTo, airportTo, "Airport not appear");
+
         type(FIRST_NAME, firstName);
 //          browser.findElement(FIRST_NAME).clear();
 //          browser.findElement(FIRST_NAME).sendKeys("First Name");
@@ -82,36 +91,40 @@ public class TicketsTests {
 
         browser.findElement(GET_PRICE_BTN).click();
 
-        Assertions.assertEquals(airportFrom,airportFrom, "Wrong airport!");
-        Assertions.assertEquals(airportTo, airportTo, "Wrong airport!");
+ //       Assertions.assertEquals(airportFrom, airportFrom, "Wrong airport!");
+ //       Assertions.assertEquals(airportTo, airportTo, "Wrong airport!");
+        Assertions.assertTrue(airportFrom.contains(airportFrom), "Destination airport From is wrong!");
+        Assertions.assertTrue(airportTo.contains(airportTo), "Destination airport To is wrong!");
+        Assertions.assertTrue(responseWithName.contains(firstName), "Incorrect name");
+        Assertions.assertTrue(airportFrom.contains(airportFrom), "Airport From is wrong");
+        Assertions.assertTrue(airportTo.contains(airportTo), "Airport To is wrong");
+        Assertions.assertTrue(price.equals(price), "Doesn't have price");
 
         browser.findElement(BOOK_BTN).click();
 
-       List<WebElement> seats = browser.findElements(SEATS);
-   //  for (int i = 0; i < 5; i++) {
-   //        wait.until(ExpectedConditions.elementToBeClickable(SEATS));
-     //      seats.get(5).click();
-   //   }
-
-  //      for (WebElement s : seats){
-   //         s.
-    //    }
+        List<WebElement> seats = browser.findElements(SEATS);
+        //  for (int i = 0; i < 5; i++) {
+        //        wait.until(ExpectedConditions.elementToBeClickable(SEATS));
+        //      seats.get(5).click();
+        //   }
 
         boolean isSeatSelect = false;
-        for (WebElement s : seats){
+        for (WebElement s : seats) {
             if (s.getText().equals(seat)) {
                 isSeatSelect = true;
+                wait.until(ExpectedConditions.elementToBeClickable(s));
                 s.click();
                 break;
             }
         }
+
         Assertions.assertTrue(isSeatSelect, "Seat not select");
-        Assertions.assertEquals(seat, seat, "Seat not select");
+        Assertions.assertTrue(seatIs.contains(seat), "Seat number is incorrect");
 
         browser.findElement(BOOK_FLIGHT_END).click();
 
-        String finalText = "Thank You for flying with us!";
-        Assertions.assertTrue(finalText.equals(finalText), "Not final text");
+        Assertions.assertEquals(finalText, finalText, "Final text is incorrect!");
+        Assertions.assertTrue(finalText.equals(finalText), "Final text is incorrect!");
     }
 
     private void select(By locator, String value) {
