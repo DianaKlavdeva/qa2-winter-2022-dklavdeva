@@ -20,9 +20,11 @@ public class AmazonSeleniumTest {
     private final By SHOP_CONTAINER = By.xpath(".//a [@class = 'nav-a  ']");
     private final By TREE_ITEM = By.xpath(".//div [@role = 'treeitem']/a");
     private final By RIGHT_COLUMN = By.id("gridItemRoot");
+    private final By CUSTOMER_COMMENTS = By.id("acrCustomerReviewLink");
 
     private final String CONTAINER = "Best Sellers";
     private final String ANY_DEPARTMENT = "Books";
+    private final String BOOKS_NUMBER = "#4";
 
     @Test
     public void openMainPage() {
@@ -57,10 +59,17 @@ public class AmazonSeleniumTest {
         }
 
         List<WebElement> items = browser.findElements(RIGHT_COLUMN);
-        for (int i = 0; i < 3; i++) {
-            items.get(3).click();
-            break;
+      //  for (int i = 0; i < 3; i++) {
+      //      items.get(3).click();
+      //      break;
+        for (WebElement item : items){
+            if (item.getText().contains(BOOKS_NUMBER)){
+                item.click();
+                break;
+            }
         }
+
+        browser.findElement(CUSTOMER_COMMENTS).click();
 
         Assertions.assertTrue(flag, "Item not found");
     }
