@@ -9,7 +9,6 @@ public class Student {
     public Student() {
 
     }
-    //--------------GETTERS / SETTERS-------------
 
     public Student(String firstName, String lastName, String email, String phone) {
         this.firstName = firstName;
@@ -17,7 +16,7 @@ public class Student {
         this.email = email;
         this.phone = phone;
     }
-
+    //--------------GETTERS / SETTERS-------------
     public String getFirstName() {
         return firstName;
     }

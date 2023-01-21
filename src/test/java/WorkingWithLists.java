@@ -17,6 +17,8 @@ public class WorkingWithLists {
         Student dimko = new Student("Dimko", "Petrov", "omg@test.lv", "+3721559879");
         Student artis = new Student("Artis", "Greattest", "null", "+712546687");
 
+        liga.setLastName("Zvaigzne");
+
         List<Student> students = new ArrayList<>();
         students.add(valera);   //0
         students.add(liga);     //1
@@ -30,7 +32,7 @@ public class WorkingWithLists {
 
         //------------------FOREACH----------------------
         for (Student s : students) {
-            System.out.println(s.getFirstName() + " " + s.getLastName());
+  //        System.out.println(s.getFirstName() + " " + s.getLastName());
             System.out.println(s.getFullName());
         }
 
