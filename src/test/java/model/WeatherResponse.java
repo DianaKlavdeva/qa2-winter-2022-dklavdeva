@@ -16,7 +16,7 @@ public class WeatherResponse {
     private List<Minute> minutely;
     private List<Hour> hourly;
     private List<Daily> dailies;
-    private List<Alerts> alerts;
+    private List<Alert> alerts;
 
     public double getLat() {
         return lat;
@@ -82,11 +82,11 @@ public class WeatherResponse {
         this.dailies = dailies;
     }
 
-    public List<Alerts> getAlerts() {
+    public List<Alert> getAlerts() {
         return alerts;
     }
 
-    public void setAlerts(List<Alerts> alerts) {
+    public void setAlerts(List<Alert> alerts) {
         this.alerts = alerts;
     }
 }
